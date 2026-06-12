@@ -122,6 +122,25 @@ class LinkedList {
         return -1;
     }
 
+    get(index) {
+        if (this.head == null) {
+            throw Error(`list is empty`);
+        } else if (index < 0) {
+            throw Error(`index should be > 0`);
+        } else if (index >= this.size) {
+            throw Error(`index should be < size`);
+        } else {
+            let current = this.head;
+            let pos = 0;
+            while (pos != index) {
+                current = current.next;
+                pos++;
+            }
+            return current.data;
+        }
+
+    }
+
     length() {
         return this.size;
     }
@@ -143,11 +162,13 @@ console.log('-----------');
 // linkedList.add(100);
 // linkedList.add(200);
 // linkedList.print();
-console.log('-----------');
+// console.log('-----------');
+
 //linkedList.addAt(100,0);
 // linkedList.addAt(100,6);
 // linkedList.print();
-console.log('-----------');
+// console.log('-----------');
+
 // linkedList.removeFront();
 // linkedList.removeFront();
 // linkedList.removeFront();
@@ -158,9 +179,14 @@ console.log('-----------');
 // linkedList.removeRear();
 // linkedList.removeRear();
 //linkedList.print();
-console.log('-----------');
+// console.log('-----------');
+
 //linkedList.removeAt(5);
 //linkedList.print();
 //console.log(linkedList.find(8));
-
-console.log('-----------');
+// console.log(linkedList.get(0));
+// console.log(linkedList.get(1));
+// console.log(linkedList.get(2));
+// console.log(linkedList.get(3));
+// console.log(linkedList.get(4));
+// console.log('-----------');
