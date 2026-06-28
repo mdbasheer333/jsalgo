@@ -13,6 +13,10 @@ class LinkedList {
         this.size = 0;
     }
 
+    isEmpty() {
+        return this.head == null;
+    }
+
     append(data) {
         const node = new Node(data);
         if (this.head == null) {
@@ -58,6 +62,14 @@ class LinkedList {
         }
     }
 
+    addAfter(ele, data) {
+        const pos = this.find(ele);
+        if (pos < 0) {
+            throw Error(`element ${ele} not found in list`);
+        }
+        this.addAt(data, pos+1);
+    }
+
     removeRear() {
         if (this.head == null || this.head.next == null) {
             this.head = null;
@@ -96,6 +108,17 @@ class LinkedList {
         } else {
             throw Error(`index ${index} is greater than the size ${this.size} of linked list`);
         }
+    }
+
+    remove(val) {
+        if (this.isEmpty()) {
+            throw Error('List empty');
+        }
+        const pos = this.find(val);
+        if (pos < 0) {
+            throw Error(`value ${val} not found in list`);
+        }
+        this.removeAt(pos);
     }
 
     print() {
@@ -156,6 +179,12 @@ linkedList.append(50);
 
 linkedList.print();
 console.log('-----------');
+
+linkedList.addAfter(50,300);
+linkedList.print();
+
+//linkedList.remove(200);
+//linkedList.print();
 
 //console.log(linkedList.length());
 
