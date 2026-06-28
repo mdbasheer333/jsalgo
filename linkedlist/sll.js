@@ -2,7 +2,7 @@
 class Node {
     constructor(data) {
         this.data = data;
-        this.Node = null;
+        this.next = null;
     }
 }
 
@@ -57,6 +57,7 @@ class LinkedList {
             }
             node.next = current.next;
             current.next = node;
+            this.size++;
         } else {
             throw Error(`index ${index} is greater than the size ${this.size} of linked list`);
         }
@@ -67,7 +68,7 @@ class LinkedList {
         if (pos < 0) {
             throw Error(`element ${ele} not found in list`);
         }
-        this.addAt(data, pos+1);
+        this.addAt(data, pos + 1);
     }
 
     removeRear() {
@@ -93,7 +94,9 @@ class LinkedList {
     }
 
     removeAt(index) {
-        if (index == 0) {
+        if (index < 0 || index >= this.size) {
+            throw Error(`index ${index} is greater than the size ${this.size} of linked list`);
+        } else if (index == 0) {
             this.removeFront();
         } else if (index == this.size - 1) {
             this.removeRear();
@@ -105,8 +108,7 @@ class LinkedList {
                 pos++;
             }
             current.next = current.next.next;
-        } else {
-            throw Error(`index ${index} is greater than the size ${this.size} of linked list`);
+            this.size--;
         }
     }
 
@@ -168,6 +170,19 @@ class LinkedList {
         return this.size;
     }
 
+    middleNode() {
+        if (this.isEmpty()) {
+            throw Error(`list is empty`);
+        }
+        let sp = this.head;
+        let fp = sp;
+        while (fp != null && fp.next != null) {
+            sp = sp.next;
+            fp = fp.next.next;
+        }
+        return sp.data;
+    }
+
 }
 
 let linkedList = new LinkedList();
@@ -176,12 +191,17 @@ linkedList.append(10);
 linkedList.append(40);
 linkedList.append(30);
 linkedList.append(50);
+linkedList.append(5);
+linkedList.append(100);
 
 linkedList.print();
 console.log('-----------');
 
-linkedList.addAfter(50,300);
-linkedList.print();
+//console.log(linkedList.middleNode());
+
+
+//linkedList.addAfter(50,300);
+//linkedList.print();
 
 //linkedList.remove(200);
 //linkedList.print();
