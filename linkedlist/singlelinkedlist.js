@@ -183,6 +183,20 @@ class LinkedList {
         return sp.data;
     }
 
+    reverse() {
+        if (this.isEmpty()) {
+            throw Error(`list is empty`);
+        }
+        let prev = null;
+        let current = this.head;
+        while (current != null) {
+            const next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        this.head = prev;
+    }
 }
 
 let linkedList = new LinkedList();
@@ -196,6 +210,9 @@ linkedList.append(100);
 
 linkedList.print();
 console.log('-----------');
+
+//  linkedList.reverse();
+//  linkedList.print();
 
 //console.log(linkedList.middleNode());
 
