@@ -93,6 +93,18 @@ class LinkedList {
         }
     }
 
+    reverseTraverse(){
+        this.rt(this.head)
+    }
+
+    rt(node){
+        if(node===null){
+            return
+        }
+        this.rt(node.next);
+        console.log(node.data);
+    }   
+
     removeAt(index) {
         if (index < 0 || index >= this.size) {
             throw Error(`index ${index} is greater than the size ${this.size} of linked list`);
@@ -234,6 +246,8 @@ linkedList.append(100);
 
 linkedList.print();
 console.log('-----------');
+
+//linkedList.reverseTraverse();
 
 //linkedList.deleteAllOccurrencesOf(40);
 //linkedList.print();
