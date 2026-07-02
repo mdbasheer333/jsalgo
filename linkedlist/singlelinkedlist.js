@@ -124,6 +124,9 @@ class LinkedList {
     }
 
     print() {
+        if(this.isEmpty()){
+            console.log(`list is empty`);            
+        }
         let current = this.head;
         while (current != null) {
             console.log(current.data);
@@ -197,19 +200,43 @@ class LinkedList {
         }
         this.head = prev;
     }
+
+    deleteAllOccurrencesOf(data) {
+        if (this.isEmpty()) {
+            throw Error(`list is empty`);
+        }
+        while (this.head !== null && this.head.data === data) {
+            this.head = this.head.next;
+            this.size --;
+        }
+        let current = this.head;
+        while(current!==null && current.next!==null){
+            if(current.next.data == data){
+                current.next = current.next.next;
+            }else{
+                current = current.next;
+            }
+        }
+    }
+
 }
 
 let linkedList = new LinkedList();
 linkedList.append(20);
 linkedList.append(10);
 linkedList.append(40);
+linkedList.append(40);
 linkedList.append(30);
 linkedList.append(50);
 linkedList.append(5);
+linkedList.append(40);
 linkedList.append(100);
 
 linkedList.print();
 console.log('-----------');
+
+//linkedList.deleteAllOccurrencesOf(40);
+//linkedList.print();
 
 //  linkedList.reverse();
 //  linkedList.print();
