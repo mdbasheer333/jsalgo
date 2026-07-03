@@ -248,9 +248,29 @@ class LinkedList {
         }
     }
 
+    removeDupsFromNoSortSLL() {
+        if (this.isEmpty()) {
+            throw Error(`list is empty`);
+        }
+        let prev = null;
+        let current = this.head;
+        let hasValue = new Set();
+
+        while (current !== null) {            
+            if (!hasValue.has(current.data)) {
+                hasValue.add(current.data);
+                prev = current;
+            } else {
+                prev.next = current.next;
+            }
+            current = current.next;
+        }
+    }
+
 }
 
 let linkedList = new LinkedList();
+linkedList.append(20);
 linkedList.append(20);
 linkedList.append(10);
 linkedList.append(40);
@@ -260,9 +280,15 @@ linkedList.append(50);
 linkedList.append(5);
 linkedList.append(40);
 linkedList.append(100);
+linkedList.append(100);
+linkedList.append(20);
 
 linkedList.print();
 console.log('-----------');
+
+//linkedList.removeDupsFromNoSortSLL();
+//linkedList.print();
+
 //linkedList.removeDupsFromSLL();
 //linkedList.print();
 
