@@ -93,17 +93,17 @@ class LinkedList {
         }
     }
 
-    reverseTraverse(){
+    reverseTraverse() {
         this.rt(this.head)
     }
 
-    rt(node){
-        if(node===null){
+    rt(node) {
+        if (node === null) {
             return
         }
         this.rt(node.next);
         console.log(node.data);
-    }   
+    }
 
     removeAt(index) {
         if (index < 0 || index >= this.size) {
@@ -136,8 +136,8 @@ class LinkedList {
     }
 
     print() {
-        if(this.isEmpty()){
-            console.log(`list is empty`);            
+        if (this.isEmpty()) {
+            console.log(`list is empty`);
         }
         let current = this.head;
         while (current != null) {
@@ -219,15 +219,32 @@ class LinkedList {
         }
         while (this.head !== null && this.head.data === data) {
             this.head = this.head.next;
-            this.size --;
+            this.size--;
         }
         let current = this.head;
-        while(current!==null && current.next!==null){
-            if(current.next.data == data){
+        while (current !== null && current.next !== null) {
+            if (current.next.data == data) {
                 current.next = current.next.next;
-            }else{
+            } else {
                 current = current.next;
             }
+        }
+    }
+
+    removeDupsFromSLL() {
+        if (this.isEmpty()) {
+            throw Error(`list is empty`);
+        }
+        let current = this.head;
+        let next = current.next;
+        while (next !== null) {
+            if (current.data === next.data) {
+                current.next = next.next;
+                this.size--;
+            } else {
+                current = current.next;
+            }
+            next = current.next;
         }
     }
 
@@ -246,6 +263,8 @@ linkedList.append(100);
 
 linkedList.print();
 console.log('-----------');
+//linkedList.removeDupsFromSLL();
+//linkedList.print();
 
 //linkedList.reverseTraverse();
 
