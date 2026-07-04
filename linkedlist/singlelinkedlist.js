@@ -71,6 +71,70 @@ class LinkedList {
         this.addAt(data, pos + 1);
     }
 
+    addAtGivenPosFromEnd(pos, data) {
+        if (pos < 1) {
+            throw new Error(`pos must be >= 1`);
+        }
+        if (this.isEmpty()) {
+            this.add(data);
+        } else {
+            if (pos > this.size + 1) {
+                throw new Error(`pos must be <= linkedlist size`);
+            } else if (pos == this.size + 1) {
+                let node = new Node(data);
+                node.next = this.head;
+                this.head = node;
+            } else {
+                let ind = 0;
+                let adv = this.head;
+                let slow = this.head;
+                while (adv != null && ind < pos) {
+                    adv = adv.next;
+                    ind++;
+                }
+                while (adv != null) {
+                    slow = slow.next;
+                    adv = adv.next;
+                }
+                let node = new Node(data);
+                node.next = slow.next;
+                slow.next = node;
+            }
+            this.size++;
+        }
+
+    }
+
+    removeAtGivenPosFromEnd(pos) {
+        if (pos < 1) {
+            throw new Error(`pos must be >= 1`);
+        }
+        if (this.isEmpty()) {
+            throw new Error(`list is empty`);
+        } else {
+            if (pos >= this.size + 1) {
+                throw new Error(`pos must be <= linkedlist size`);
+            } else if (pos === this.size) {
+                this.head = this.head.next;
+            } else {
+                let ind = 0;
+                let adv = this.head;
+                let slow = this.head;
+                while (adv.next != null && ind < pos) {
+                    adv = adv.next;
+                    ind++;
+                }
+                while (adv.next != null) {
+                    slow = slow.next;
+                    adv = adv.next;
+                }
+                slow.next = slow.next.next;
+            }
+            this.size--;
+        }
+
+    }
+
     removeRear() {
         if (this.head == null || this.head.next == null) {
             this.head = null;
@@ -257,7 +321,7 @@ class LinkedList {
         let current = this.head;
         let hasValue = new Set();
 
-        while (current !== null) {            
+        while (current !== null) {
             if (!hasValue.has(current.data)) {
                 hasValue.add(current.data);
                 prev = current;
@@ -288,6 +352,9 @@ linkedList.append(20);
 linkedList.print();
 console.log('-----------');
 
+//linkedList.addAtGivenPosFromEnd(1, 200);
+//linkedList.removeAtGivenPosFromEnd(7);
+//linkedList.print();
 //linkedList.removeDupsFromNoSortSLL();
 //linkedList.print();
 
