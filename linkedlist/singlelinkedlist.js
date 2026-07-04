@@ -223,8 +223,9 @@ class LinkedList {
         }
         let current = this.head;
         while (current !== null && current.next !== null) {
-            if (current.next.data == data) {
+            if (current.next.data === data) {
                 current.next = current.next.next;
+                this.size--;
             } else {
                 current = current.next;
             }
@@ -262,6 +263,7 @@ class LinkedList {
                 prev = current;
             } else {
                 prev.next = current.next;
+                this.size--;
             }
             current = current.next;
         }
