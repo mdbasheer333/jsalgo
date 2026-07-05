@@ -333,6 +333,28 @@ class LinkedList {
         }
     }
 
+    sortedInsert(data) {
+        const node = new Node(data);
+        if (this.isEmpty()) {
+            this.head = node;
+        } else {
+            let prev = null;
+            let curr = this.head;
+            if (data < curr.data) {
+                node.next = this.head;
+                this.head = node;
+            } else {
+                while (curr != null && curr.data <= data) {
+                    prev = curr;
+                    curr = curr.next;
+                }
+                node.next = curr;
+                prev.next = node;
+            }
+        }
+        this.size++;
+    }
+
 }
 
 let linkedList = new LinkedList();
